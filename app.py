@@ -15,7 +15,7 @@ def carregar_dados():
 df = carregar_dados()
 
 # Sidebar - Filtros Interativos
-st.sidebar.title("🔍 Filtros de Análise")
+st.sidebar.title("Filtros de Análise")
 if 'Municipio' in df.columns:
     municipios = st.sidebar.multiselect(
         "Selecione os Municípios",
@@ -27,7 +27,7 @@ else:
     df_filtrado = df
 
 # Abas / Seções Organizadoras
-tab1, tab2, tab3 = st.tabs(["📌 KPIs & Gráficos", "🌐 Clima em Tempo Real (API)", "📄 Dados Detalhados"])
+tab1, tab2, tab3 = st.tabs(["KPIs & Gráficos", "Clima em Tempo Real (API)", "Dados Detalhados"])
 
 with tab1:
     col1, col2, col3 = st.columns(3)
