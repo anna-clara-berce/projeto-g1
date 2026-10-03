@@ -1,8 +1,5 @@
-pandas
-numpy
-matplotlib
-seaborn
-plotly
 streamlit
-sqlalchemy
+pandas
+plotly
 requests
+sqlalchemy
