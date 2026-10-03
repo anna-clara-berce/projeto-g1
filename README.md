@@ -10,12 +10,19 @@ Projeto de análise exploratória de dados pluviométricos e mapeamento de risco
 
 ---
 
-## 🔗 Links Rápidos de Acesso
+## 🎓 Informações Acadêmicas
+
+* **Disciplina:** Linguagem de Programação — Análise e Visualização de Dados com Python
+* **Professor:** Alexandre Neves Louzada
+* **Aluna:** Anna Clara Berce
+
+---
+
+## 🔗 Links Oficiais de Acesso
 
 * 🌐 **Página Web de Apresentação (GitHub Pages):** [https://anna-clara-berce.github.io/projeto-g1/](https://anna-clara-berce.github.io/projeto-g1/)
+* 📊 **Dashboard Interativo (Streamlit Cloud):** [https://projeto-g1-annaclaraberce.streamlit.app](https://projeto-g1-annaclaraberce.streamlit.app)
 * 💻 **Repositório do Código (GitHub):** [https://github.com/anna-clara-berce/projeto-g1](https://github.com/anna-clara-berce/projeto-g1)
-* 📊 **Dashboard Interativo (Streamlit Cloud):** [Acessar Dashboard](https://SEU-APP-STREAMLIT.streamlit.app)
-
 ---
 
 ## 📌 Sobre o Projeto
