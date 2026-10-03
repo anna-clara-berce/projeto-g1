@@ -2,59 +2,69 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import requests
+from sqlalchemy import create_engine
 
-st.set_page_config(page_title="Monitor de Chuvas e Deslizamentos - RJ", layout="wide")
+st.set_page_config(page_title="Chuvas & Deslizamentos RJ", layout="wide")
 
-st.title(" Monitoramento de Chuvas e Deslizamentos no Estado do Rio de Janeiro")
-st.markdown("Análise exploratória de dados pluviométricos e mapeamento de riscos climáticos no RJ.")
+# Título e Descrição
+st.title("☔ Monitoramento de Chuvas e Deslizamentos - RJ")
+st.markdown("Análise de precipitação pluviométrica e mapeamento de riscos para o Estado do Rio de Janeiro.")
 
+# Carregamento de dados
 @st.cache_data
 def carregar_dados():
-    return pd.read_csv('dados/simulacao_chuvas_deslizamentos_rj.csv')
+    df = pd.read_csv('dados/simulacao_chuvas_deslizamentos_rj.csv')
+    return df
 
 df = carregar_dados()
 
-# Sidebar - Filtros Interativos
-st.sidebar.title("Filtros de Análise")
+# Persistência com SQLAlchemy (Salva dados no banco SQLite local)
+engine = create_engine('sqlite:///database/chuvas_rj.db')
+df.to_sql('ocorrencias', con=engine, if_exists='replace', index=False)
+
+# Sidebar / Filtros
+st.sidebar.header("🔍 Filtros de Consulta")
+colunas = df.columns.tolist()
+
+# Filtro dinâmico se existir coluna de município/região
 if 'Municipio' in df.columns:
-    municipios = st.sidebar.multiselect(
-        "Selecione os Municípios",
-        options=df['Municipio'].unique(),
-        default=df['Municipio'].unique()
-    )
-    df_filtrado = df[df['Municipio'].isin(municipios)]
+    muni_sel = st.sidebar.multiselect("Municípios", options=df['Municipio'].unique(), default=df['Municipio'].unique())
+    df_filtrado = df[df['Municipio'].isin(muni_sel)]
 else:
     df_filtrado = df
 
-# Abas / Seções Organizadoras
-tab1, tab2, tab3 = st.tabs(["KPIs & Gráficos", "Clima em Tempo Real (API)", "Dados Detalhados"])
+# Abas Organizadoras
+tab1, tab2, tab3 = st.tabs(["📌 KPIs & Gráficos", "🌐 Clima em Tempo Real (API)", "📄 Tabela & Download"])
 
 with tab1:
     col1, col2, col3 = st.columns(3)
-    col1.metric("Total de Registros", len(df_filtrado))
-    if 'Precipitacao_mm' in df.columns:
-        col2.metric("Média de Precipitação (mm)", f"{df_filtrado['Precipitacao_mm'].mean():.1f} mm")
-    if 'Risco_Deslizamento' in df.columns:
-        col3.metric("Ocorrências / Risco Alto", int(df_filtrado['Risco_Deslizamento'].sum()))
+    col1.metric("Total de Ocorrências", len(df_filtrado))
+    if 'Precipitacao_mm' in df_filtrado.columns:
+        col2.metric("Precipitação Média", f"{df_filtrado['Precipitacao_mm'].mean():.1f} mm")
+    if 'Risco_Deslizamento' in df_filtrado.columns:
+        col3.metric("Alto Risco", int(df_filtrado['Risco_Deslizamento'].sum()))
 
+    st.markdown("---")
+    
     # Gráfico com Plotly
-    if 'Data' in df.columns and 'Precipitacao_mm' in df.columns:
-        fig = px.line(df_filtrado, x='Data', y='Precipitacao_mm', title="Série Temporal de Precipitação")
+    if 'Precipitacao_mm' in df_filtrado.columns:
+        fig = px.histogram(df_filtrado, x='Precipitacao_mm', title="Distribuição de Precipitação (mm)", color_discrete_sequence=['#1e3d59'])
         st.plotly_chart(fig, use_container_width=True)
 
 with tab2:
-    st.subheader("Consumo de API Externa (Previsão do Tempo Exemplo)")
-    # Consumo de API para dados meteorológicos reais
+    st.subheader("🌐 Previsão Meteorológica Atual na Capital (API Open-Meteo)")
     try:
-        res = requests.get("https://api.open-meteo.com/v1/forecast?latitude=-22.9068&longitude=-43.1729&current_weather=true").json()
+        url = "https://api.open-meteo.com/v1/forecast?latitude=-22.9068&longitude=-43.1729&current_weather=true"
+        res = requests.get(url).json()
         temp = res['current_weather']['temperature']
-        st.info(f"Temperatura atual na Capital (Rio de Janeiro): {temp} °C")
+        vento = res['current_weather']['windspeed']
+        st.info(f"🌡️ **Temperatura Atual:** {temp} °C | 💨 **Velocidade do Vento:** {vento} km/h")
     except Exception as e:
-        st.warning("Não foi possível carregar a API externa no momento.")
+        st.error("Erro ao carregar os dados da API.")
 
 with tab3:
     st.dataframe(df_filtrado)
-    st.download_button("Baixar Dados Filtrados (CSV)", df_filtrado.to_csv(index=False), "chuvas_rj_filtrado.csv")
+    st.download_button("Baixar Dados Filtrados (CSV)", df_filtrado.to_csv(index=False), "dados_chuvas_rj.csv")
 
 st.markdown("---")
-st.caption("Conclusão Executiva: Os dados apontam maior risco nos meses de verão, exigindo atenção para planos de contingência.")
+st.caption("Conclusão Executiva: O acúmulo continuado de precipitação correlaciona-se diretamente com o aumento do risco geoambiental.")
