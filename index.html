@@ -2,24 +2,41 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Projeto G1 - Chuvas e Deslizamentos RJ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Chuvas e Deslizamentos - RJ</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f8f9fa; color: #333; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        a { color: #0066cc; text-decoration: none; font-weight: bold; }
-        a:hover { text-decoration: underline; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { color: #1e3d59; margin-bottom: 10px; }
+        p { line-height: 1.6; color: #555; }
+        .card-container { display: flex; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
+        .card { flex: 1; min-width: 250px; background: #e8eef5; padding: 20px; border-radius: 8px; text-align: center; border-left: 5px solid #1e3d59; }
+        .btn { display: inline-block; padding: 12px 24px; margin-top: 15px; background-color: #1e3d59; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; }
+        .btn:hover { background-color: #172b3c; }
+        footer { margin-top: 40px; text-align: center; font-size: 0.9em; color: #888; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Monitoramento de Chuvas e Deslizamentos - Estado do Rio de Janeiro</h1>
-        <p>Projeto individual desenvolvido para a disciplina de Linguagem de Programação — Avaliação G1.</p>
+        <h1>☔ Monitoramento de Chuvas e Deslizamentos - RJ</h1>
+        <p>Projeto de análise exploratória e monitoramento de eventos de precipitação extrema e risco de deslizamentos no Estado do Rio de Janeiro.</p>
         
-        <h2>Links de Acesso ao Projeto:</h2>
-        <ul>
-            <li><a href="https://streamlit.io" target="_blank">Acessar Dashboard Interativo (Streamlit Community Cloud)</a></li>
-            <li><a href="https://github.com" target="_blank">💻 Repositório do Código-Fonte no GitHub</a></li>
-        </ul>
+        <div class="card-container">
+            <div class="card">
+                <h3>📊 Dashboard Interativo</h3>
+                <p>Acesse o painel com gráficos, filtros e indicadores dinâmicos em tempo real.</p>
+                <a href="https://SEU-USUARIO.streamlit.app" target="_blank" class="btn">Abrir Dashboard</a>
+            </div>
+            <div class="card">
+                <h3>💻 Código Fonte</h3>
+                <p>Consulte o repositório no GitHub contendo o Jupyter Notebook e os scripts Python.</p>
+                <a href="https://github.com/SEU-USUARIO/projeto-g1" target="_blank" class="btn">Ver no GitHub</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>Trabalho Individual — Disciplina de Linguagem de Programação | Avaliação G1</p>
+        </footer>
     </div>
 </body>
 </html>
