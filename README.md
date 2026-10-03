@@ -12,9 +12,9 @@ Projeto de análise exploratória de dados pluviométricos e mapeamento de risco
 
 ## 🔗 Links Rápidos de Acesso
 
-* 🌐 **Página Web de Apresentação (GitHub Pages):** [Acessar Apresentação](https://anna-clara-berce.github.io/projeto-g1/)
-* 📊 **Dashboard Interativo (Streamlit Cloud):** [Acessar Dashboard](https://anna-clara-berce.streamlit.app/)
-* 💻 **Repositório do Código (GitHub):** [Acessar Repositório](https://github.com/anna-clara-berce/projeto-g1)
+* 🌐 **Página Web de Apresentação (GitHub Pages):** [https://anna-clara-berce.github.io/projeto-g1/](https://anna-clara-berce.github.io/projeto-g1/)
+* 💻 **Repositório do Código (GitHub):** [https://github.com/anna-clara-berce/projeto-g1](https://github.com/anna-clara-berce/projeto-g1)
+* 📊 **Dashboard Interativo (Streamlit Cloud):** [Acessar Dashboard](https://SEU-APP-STREAMLIT.streamlit.app)
 
 ---
 
@@ -22,25 +22,9 @@ Projeto de análise exploratória de dados pluviométricos e mapeamento de risco
 
 O Estado do Rio de Janeiro sofre constantemente com eventos climáticos extremos. Este projeto analisa a relação entre precipitação, acúmulo de chuvas e ocorrências de deslizamentos em áreas de encosta.
 
-### Funcionalidades do Dashboard:
-- 🔍 **Filtros Dinâmicos:** Seleção de municípios e períodos.
-- 📈 **KPIs em Tempo Real:** Total de registros, precipitação média (mm) e contagem de ocorrências de risco elevado.
-- 📊 **Gráficos Interativos:** Séries temporais de pluviometria e distribuição estatística via Plotly e Seaborn.
-- 🌐 **Consumo de API Meteorológica:** Previsão em tempo real utilizando a API pública Open-Meteo.
-- 🗄️ **Persistência em Banco de Dados:** Mapeamento e exportação dos dados limpos via SQLAlchemy em banco SQLite.
-
 ---
 
-## 📁 Estrutura do Repositório
+## 👤 Autora
 
-```text
-projeto-g1/
-│
-├── app.py                  # Código do Dashboard em Streamlit
-├── requirements.txt        # Dependências do projeto
-├── README.md               # Documentação completa
-├── index.html              # Página Web de Apresentação (GitHub Pages)
-├── dados/                  # Base de dados (simulacao_chuvas_deslizamentos_rj.csv)
-├── database/               # Banco de dados SQLite (chuvas_rj.db)
-├── notebooks/              # Jupyter Notebook com a análise exploratória (.ipynb)
-└── imagens/                # Capturas de tela e gráficos do projeto
+**Anna Clara Berce Cavalcanti de Albuquerque**  
+Trabalho individual desenvolvido para a disciplina de **Linguagem de Programação — Análise e Visualização de Dados com Python**.
