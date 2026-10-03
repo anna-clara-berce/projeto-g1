@@ -1,1 +1,8 @@
+from sqlalchemy import create_engine
+import pandas as pd
 
+# Conexão com o banco SQLite local
+engine = create_engine('sqlite:///database/chuvas_rj.db')
+
+# Persistência do DataFrame processado na tabela 'deslizamentos'
+df.to_sql('deslizamentos', con=engine, if_exists='replace', index=False)
