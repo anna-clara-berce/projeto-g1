@@ -3,12 +3,14 @@ import pandas as pd
 import plotly.express as px
 import requests
 
-# 1. Configuração da página (deve ser o primeiro comando Streamlit)
-st.set_page_config(page_title="Monitor de Chuvas RJ", layout="wide")
+st.set_page_config(
+    page_title="Monitor de Chuvas e Deslizamentos RJ",
+    page_icon="☔",
+    layout="wide"
+)
 
-# 2. Título e Descrição
-st.title("Monitoramento de Chuvas e Deslizamentos no RJ")
-st.markdown("Análise exploratória de dados pluviométricos e mapa de riscos.")
+st.title("☔ Monitoramento de Chuvas e Deslizamentos - RJ")
+st.subheader("Avaliação G1 — Análise e Visualização de Dados")
 
 # 3. Leitura de dados otimizada com cache (@st.cache_data)
 @st.cache_data
@@ -17,17 +19,13 @@ def carregar_dados():
 
 df = carregar_dados()
 
-# 4. Barra Lateral (Sidebar) com Filtros Interativos
-st.sidebar.title("Filtros")
-if 'Municipio' in df.columns:
-    municipios = st.sidebar.multiselect(
-        "Selecione os Municípios",
-        options=df['Municipio'].unique(),
-        default=df['Municipio'].unique()
-    )
-    df_filtrado = df[df['Municipio'].isin(municipios)]
-else:
-    df_filtrado = df
+# Identificação do Projeto na Barra Lateral (Sidebar)
+st.sidebar.markdown("---")
+st.sidebar.subheader("📌 Informações do Projeto")
+st.sidebar.write("**Disciplina:** Linguagem de Programação — Análise e Visualização de Dados com Python")
+st.sidebar.write("**Professor:** Alexandre Neves Louzada")
+st.sidebar.write("**Aluna:** Anna Clara Berce")
+st.sidebar.markdown("---")
 
 # 5. Organização em Abas (Tabs)
 tab1, tab2, tab3 = st.tabs(["KPIs & Gráficos", "API Meteorológica", "Tabela de Dados"])
