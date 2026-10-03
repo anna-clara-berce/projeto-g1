@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 st.set_page_config(page_title="Chuvas & Deslizamentos RJ", layout="wide")
 
 # Título e Descrição
-st.title("☔ Monitoramento de Chuvas e Deslizamentos - RJ")
+st.title("Monitoramento de Chuvas e Deslizamentos - RJ")
 st.markdown("Análise de precipitação pluviométrica e mapeamento de riscos para o Estado do Rio de Janeiro.")
 
 # Carregamento de dados
@@ -23,7 +23,7 @@ engine = create_engine('sqlite:///database/chuvas_rj.db')
 df.to_sql('ocorrencias', con=engine, if_exists='replace', index=False)
 
 # Sidebar / Filtros
-st.sidebar.header("🔍 Filtros de Consulta")
+st.sidebar.header("Filtros de Consulta")
 colunas = df.columns.tolist()
 
 # Filtro dinâmico se existir coluna de município/região
@@ -34,7 +34,7 @@ else:
     df_filtrado = df
 
 # Abas Organizadoras
-tab1, tab2, tab3 = st.tabs(["📌 KPIs & Gráficos", "🌐 Clima em Tempo Real (API)", "📄 Tabela & Download"])
+tab1, tab2, tab3 = st.tabs(["KPIs & Gráficos", "Clima em Tempo Real (API)", "Tabela & Download"])
 
 with tab1:
     col1, col2, col3 = st.columns(3)
@@ -58,7 +58,7 @@ with tab2:
         res = requests.get(url).json()
         temp = res['current_weather']['temperature']
         vento = res['current_weather']['windspeed']
-        st.info(f"🌡️ **Temperatura Atual:** {temp} °C | 💨 **Velocidade do Vento:** {vento} km/h")
+        st.info(f"**Temperatura Atual:** {temp} °C | **Velocidade do Vento:** {vento} km/h")
     except Exception as e:
         st.error("Erro ao carregar os dados da API.")
 
